@@ -122,3 +122,30 @@ function animateRanges() {
 }
 
 window.addEventListener("scroll", animateRanges);
+
+/*MY PROJECTS*/
+
+function initProjectFilter() {
+  const buttons = document.querySelectorAll(".buttons-container button");
+  const cards = document.querySelectorAll(".card");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const category = button.id;
+
+      cards.forEach((card) => {
+        card.style.display =
+          category === "all" || card.dataset.category === category
+            ? "flex"
+            : "none";
+      });
+
+      buttons.forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
+    });
+  });
+
+  document.getElementById("all").click();
+}
+
+initProjectFilter();
