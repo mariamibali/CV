@@ -149,3 +149,33 @@ function initProjectFilter() {
 }
 
 initProjectFilter();
+
+/*TESTIMONIALS*/
+
+function initTestimonialSlider() {
+  const slides = document.querySelectorAll(".img-feedback");
+  const buttons = document.querySelectorAll(".test-buttons button");
+
+  let activeIndex = 0;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.style.display = i === index ? "flex" : "none";
+    });
+
+    buttons.forEach((btn) => btn.classList.remove("active"));
+    buttons[index].classList.add("active");
+
+    activeIndex = index;
+  }
+
+  buttons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      showSlide(index);
+    });
+  });
+
+  showSlide(0);
+}
+
+initTestimonialSlider();
