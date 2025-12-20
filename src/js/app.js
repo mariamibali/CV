@@ -174,6 +174,22 @@ function initTestimonialSlider() {
       showSlide(index);
     });
   });
+  let startX = 0;
+
+  slides.forEach((slide) => {
+    slide.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+    slide.addEventListener("touchend", (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+      if (diff > 50) {
+        showSlide((activeIndex + 1) % slides.length);
+      } else if (diff < -50) {
+        showSlide((activeIndex - 1 + slides.length) % slides.length);
+      }
+    });
+  });
 
   showSlide(0);
 }
