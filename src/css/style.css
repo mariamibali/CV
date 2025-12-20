@@ -4,6 +4,13 @@
   padding: 0;
   box-sizing: border-box;
 }
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 15vh;
+}
 body {
   font-family: "Poppins", sans-serif;
   background-color: #1e1e1e;
@@ -589,4 +596,92 @@ nav button:hover {
   margin-top: 15px;
   padding: 10px;
   border-radius: 14px;
+}
+
+/* media queries*/
+@media (max-width: 1200px) {
+  .hero {
+    flex-wrap: wrap;
+  }
+  .hero-text h3 {
+    font-weight: 400;
+  }
+  .hero-image-social {
+    margin-top: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .header-container {
+    justify-content: space-between;
+  }
+  .header-container nav {
+    display: none;
+  }
+  .sidebar-btn {
+    display: block;
+  }
+  .mobile-nav {
+    width: 140px;
+  }
+  .hero-image-social {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+  .hero-text p,
+  .hero-text button,
+  .about-image {
+    display: none;
+  }
+  .hero-text h4 {
+    margin-left: 0;
+  }
+  .hero {
+    margin-top: 15vh;
+  }
+
+  .slide {
+    margin-top: 20px;
+  }
+  .slide img {
+    max-width: 100%;
+  }
+  .img-feedback {
+    flex-wrap: wrap;
+  }
+  .feedback {
+    flex-direction: column-reverse;
+  }
+  .img-feedback {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-text,
+  .project-text,
+  .testimonial-text,
+  .contact-text {
+    text-align: start;
+  }
+  .buttons-container {
+    overflow-x: scroll;
+    justify-content: flex-start;
+  }
+  .contact-section form {
+    display: flex;
+    flex-direction: column;
+  }
+  .footer-content {
+    flex-wrap: wrap-reverse;
+  }
+  .footer-content ul {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (width<375px) {
+  .service-card {
+    width: 90%;
+  }
 }
