@@ -179,3 +179,145 @@ function initTestimonialSlider() {
 }
 
 initTestimonialSlider();
+
+/*CONTACT*/
+
+function initContactForm() {
+  const form = document.getElementById("contactForm");
+  const nameInput = form.querySelector("#name");
+  const emailInput = form.querySelector("#email");
+  const websiteInput = form.querySelector("#website");
+  const messageInput = form.querySelector("#message");
+  const modal = document.getElementById("modal");
+  const closeBtn = document.getElementById("closeModal");
+
+  function removeMessage(input) {
+    const existing = input.parentElement.querySelector(".input-message");
+    if (existing) existing.remove();
+  }
+
+  function showError(input, text) {
+    removeMessage(input);
+    input.style.border = "2px solid red";
+    input.classList.remove("input-shake");
+    input.classList.add("input-shake");
+
+    const msg = document.createElement("p");
+    msg.className = "input-message error";
+    msg.innerText = text;
+
+    input.parentElement.appendChild(msg);
+  }
+  function showSuccess(input) {
+    removeMessage(input);
+    input.style.border = "2px solid green";
+  }
+
+  function validateName() {
+    const value = nameInput.value.trim();
+    if (!value) {
+      showError(nameInput, "Name is required");
+      return false;
+    }
+    if (/\d/.test(value)) {
+      showError(nameInput, "Name cannot contain numbers");
+      return false;
+    }
+    showSuccess(nameInput);
+    return true;
+  }
+
+  function validateEmail() {
+    const value = emailInput.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!value) {
+      showError(emailInput, "Email is required");
+      return false;
+    }
+    if (!emailRegex.test(value)) {
+      showError(emailInput, "Invalid email format");
+      return false;
+    }
+    showSuccess(emailInput);
+    return true;
+  }
+
+  function validateMessage() {
+    const value = messageInput.value.trim();
+    if (!value) {
+      showError(messageInput, "Message is required");
+      return false;
+    }
+    showSuccess(messageInput);
+    return true;
+  }
+
+  function validateWebsite() {
+    const value = websiteInput.value.trim();
+    if (!value) {
+      websiteInput.style.border = "2px solid #ccc";
+      removeMessage(websiteInput);
+      return true;
+    }
+    const urlRegex = /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}\/?$/i;
+    if (!urlRegex.test(value)) {
+      showError(websiteInput, "Invalid website URL");
+      return false;
+    }
+    showSuccess(websiteInput);
+    return true;
+  }
+
+  nameInput.addEventListener("input", validateName);
+  emailInput.addEventListener("input", validateEmail);
+  messageInput.addEventListener("input", validateMessage);
+  websiteInput.addEventListener("input", validateWebsite);
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const isNameValid = validateName();
+    const isEmailValid = validateEmail();
+    const isMessageValid = validateMessage();
+    const isWebsiteValid = validateWebsite();
+
+    if (!(isNameValid && isEmailValid && isMessageValid && isWebsiteValid))
+      return;
+
+    const data = {
+      title: nameInput.value,
+      body: `${messageInput.value} | Email:${emailInput.value} | Website: ${websiteInput.value}`,
+      userId: 1,
+    };
+
+    fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then(() => {
+        showModal();
+        form.reset();
+
+        [nameInput, emailInput, websiteInput, messageInput].forEach((input) => {
+          input.style.border = "none";
+          removeMessage(input);
+        });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
+
+  function showModal() {
+    modal.style.display = "flex";
+  }
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+}
+
+initContactForm();

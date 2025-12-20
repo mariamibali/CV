@@ -497,12 +497,44 @@ nav button:hover {
 .contact-section form div textarea {
   width: 100%;
   border-radius: 14px;
+  outline: none;
   border: none;
   padding: 20px;
   font-size: clamp(15px, 2vw, 21px);
 }
 .contact-section form div textarea {
   resize: none;
+}
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-3px);
+  }
+  40% {
+    transform: translateX(3px);
+  }
+  60% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.input-shake {
+  animation: shake 0.3s;
+}
+.input-message {
+  font-size: 12px;
+  margin-top: 5px;
+  color: red;
+}
+.input-message.success {
+  color: green;
 }
 
 /* footer */
@@ -532,4 +564,29 @@ nav button:hover {
   height: 84px;
   background-color: #121212;
   font-size: clamp(15px, 2vw, 21px);
+}
+
+/* modal */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 14px;
+  text-align: center;
+}
+.modal-content p {
+  color: #000000;
+}
+.modal-content button {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 14px;
 }

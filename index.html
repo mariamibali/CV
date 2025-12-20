@@ -332,14 +332,13 @@
           </p>
         </div>
         <div class="form-container">
-          <form id="contactForm">
+          <form id="contactForm" novalidate>
             <div>
               <input
                 type="text"
                 id="name"
                 name="name"
                 placeholder="Your Name"
-                required
               />
             </div>
             <div>
@@ -348,7 +347,6 @@
                 id="email"
                 name="email"
                 placeholder="Enter Your Email"
-                required
               />
             </div>
             <div>
@@ -364,7 +362,6 @@
                 id="message"
                 name="message"
                 placeholder="Enter Your Message"
-                required
               ></textarea>
             </div>
             <button type="submit">Contact Us</button>
@@ -404,6 +401,12 @@
     </footer>
     <div class="rights">
       &copy; 2025 MARIAM BALIASHVILI. All rights reserved.
+    </div>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <p>Thank you for getting in touch! We appreciate you contacting us.</p>
+        <button id="closeModal">Close</button>
+      </div>
     </div>
   </body>
 </html>
